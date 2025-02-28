@@ -1,0 +1,81 @@
+<html lang="en">
+<head>
+    <title>NUMBER AUDIO PLAYER</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+            text-align: center;
+            padding: 50px;
+        }
+        h2 {
+            color: #444;
+        }
+        input {
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #87CEFA;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            color: white;
+            margin-top: 10px;
+        }
+        button:hover {
+            background-color: #4682B4;
+        }
+    </style>
+</head>
+<body>
+    <p>enter the number</p>
+    <input type="number" id="numberInput">
+    <button
+    onclick="playNumberAudio()"
+    >play</button>
+   <script>
+    function breakDownNumber(num) {
+            let thousands = Math.floor(num / 1000);
+            let hundreds = Math.floor((num % 1000) / 100);
+            let tens = Math.floor((num % 100) / 10);
+            let ones = num % 10;
+            return { thousands, hundreds, tens, ones };
+        }
+
+        function playNumberAudio() {
+            let number = document.getElementById("numberInput").value;
+            console.log(number);
+            if (number < 0 || number > 9999 || isNaN(number)) {
+                alert("Please enter a number between 0 and 9999.");
+                return;
+            }
+
+            let parts = breakDownNumber(number);
+            let audioQueue = [];
+
+            if (parts.thousands) audioQueue.push(`./1000-9000/${parts.thousands}000.mp3`);
+            if (parts.hundreds) audioQueue.push(`./100-900/${parts.hundreds}00.mp3`);
+            if (parts.tens) audioQueue.push(`./10-90/${parts.tens}0.mp3`);
+            if (parts.ones && parts.tens !== 1) audioQueue.push(`./1-9/${parts.ones}.mp3`);
+            
+            playAudioSequence(audioQueue);
+        }
+        function playAudioSequence(audioFiles) {
+            if (audioFiles.length === 0) return;
+            let audio = new Audio(audioFiles.shift());
+            audio.volume = 1.0; // Set volume to maximum
+            audio.playbackRate = 0.75; // Play audio slower
+
+            audio.play();
+            audio.onended = () => playAudioSequence(audioFiles);
+        }
+
+   </script> 
+</body>
+</html>
