@@ -22,7 +22,7 @@ This project is a **voice-based payment confirmation system**, inspired by **Pho
 ## 🔹 Installation & Usage
 1. Clone the repository:
    ```bash
-   git clone https://github.com/your-username/phonepe-voice-notification.git
+   git clone https://github.com/mokshitha890/phonepay-voice-demo-js
    cd phonepe-voice-notification
    ```
 2. Open `index.html` in a browser.
