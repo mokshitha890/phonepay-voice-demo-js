@@ -1,29 +1,40 @@
-PhonePe Voice Payment Confirmation Module
+# PhonePe-Style Voice Payment Notification
 
-This repository showcases a voice-based payment confirmation module for PhonePe. This project demonstrates audio processing techniques for voice feedback.
+This project is a **voice-based payment confirmation system**, inspired by **PhonePe**. It dynamically constructs and plays audio messages for transaction confirmations, providing a seamless user experience similar to real-world digital payment applications.
 
-Features
+## 🔹 Features
+- Accepts user input for the transaction amount
+- Breaks down numbers into thousands, hundreds, tens, and ones
+- Dynamically selects and plays pre-recorded audio clips for each number
+- Ensures smooth audio playback for a natural-sounding notification
 
-Automated Audio Splitting: Easily split long recordings into individual clips (e.g., numbers 1-9).
+## 🔹 How It Works
+1. The user enters an amount (0–9999).
+2. The script breaks down the number and maps it to corresponding audio files.
+3. The system plays the clips in sequence to form a complete notification, e.g.:
+   **"You received 2,350 to your bank account."**
 
-Batch Export with Labeling: Use labels to name and export multiple clips quickly.
+## 🔹 Tech Stack
+- **JavaScript** – Handles number processing and audio sequencing
+- **HTML & CSS** – Provides a simple, responsive UI
+- **Pre-recorded audio clips** – Used for dynamic voice playback
 
-Efficient Voice Feedback Handling: Organizes audio clips for better demonstration of voice confirmations.
+## 🔹 Installation & Usage
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/your-username/phonepe-voice-notification.git
+   cd phonepe-voice-notification
+   ```
+2. Open `index.html` in a browser.
+3. Enter an amount and press **Play** to hear the voice notification.
+
+## 🔹 Demo
+[Demo Link](https://phonepay-voice.netlify.app/)
 
 
+## 🔹 Contributing
+Feel free to **fork** this repository, submit issues, or create pull requests. Contributions are welcome!
 
-Future Enhancements
+## 🔹 License
+This project is licensed under the **MIT License**.
 
-Implement AI-based voice synthesis for personalized confirmations.
-
-Automate label detection using speech recognition.
-
-Optimize response time for instant feedback.
-
-Contribution
-
-Feel free to fork this repository, submit issues, or contribute to improving the project.
-
-License
-
-This project is licensed under the MIT License.
