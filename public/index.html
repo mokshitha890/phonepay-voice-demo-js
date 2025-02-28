@@ -34,12 +34,16 @@
         button:hover {
             background-color: #4682B4;
         }
+        button:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
     </style>
 </head>
 <body>
     <h2>Enter the amount to listen to voice </h2>
     <input type="number" id="numberInput">
-    <button onclick="playNumberAudio()">Play</button>
+    <button id="playButton" onclick="playNumberAudio()">Play</button>
    <script>
     function breakDownNumber(num) {
         let thousands = Math.floor(num / 1000);
@@ -51,9 +55,13 @@
 
     function playNumberAudio() {
         let number = document.getElementById("numberInput").value;
+        let playButton = document.getElementById("playButton");
+        playButton.disabled = true; // Disable button while playing
+
         console.log(number);
         if (number < 0 || number > 9999 || isNaN(number)) {
             alert("Please enter a number between 0 and 9999.");
+            playButton.disabled = false;
             return;
         }
 
@@ -76,15 +84,17 @@
         // Add "to your bank account" part
         audioQueue.push("./messages/part_2.mp3");
         
-        playAudioSequence(audioQueue);
+        playAudioSequence(audioQueue, playButton);
     }
     
-    function playAudioSequence(audioFiles) {
-        if (audioFiles.length === 0) return;
+    function playAudioSequence(audioFiles, playButton) {
+        if (audioFiles.length === 0) {
+            playButton.disabled = false; // Enable button after playback
+            return;
+        }
         let audio = new Audio(audioFiles.shift());
-        audio.playbackRate = 0.75; // Play audio slower
         audio.play();
-        audio.onended = () => playAudioSequence(audioFiles);
+        audio.onended = () => playAudioSequence(audioFiles, playButton);
     }
    </script> 
 </body>
