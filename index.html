@@ -59,10 +59,10 @@
             let parts = breakDownNumber(number);
             let audioQueue = [];
 
-            if (parts.thousands) audioQueue.push(`./1000-9000/${parts.thousands}000.mp3`);
-            if (parts.hundreds) audioQueue.push(`./100-900/${parts.hundreds}00.mp3`);
-            if (parts.tens) audioQueue.push(`./10-90/${parts.tens}0.mp3`);
-            if (parts.ones && parts.tens !== 1) audioQueue.push(`./1-9/${parts.ones}.mp3`);
+            if (parts.thousands) audioQueue.push(`./public/1000-9000/${parts.thousands}000.mp3`);
+            if (parts.hundreds) audioQueue.push(`./public/100-900/${parts.hundreds}00.mp3`);
+            if (parts.tens) audioQueue.push(`./public/10-90/${parts.tens}0.mp3`);
+            if (parts.ones && parts.tens !== 1) audioQueue.push(`./public/1-9/${parts.ones}.mp3`);
             
             playAudioSequence(audioQueue);
         }
@@ -75,6 +75,7 @@
             audio.play();
             audio.onended = () => playAudioSequence(audioFiles);
         }
+        
 
    </script> 
 </body>
