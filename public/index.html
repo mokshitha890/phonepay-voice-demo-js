@@ -42,9 +42,28 @@
 </head>
 <body>
     <h2>Enter the amount to listen to voice </h2>
-    <input type="number" id="numberInput" placeholder="enter amount between 1-9000">
+    <input type="number" id="numberInput" placeholder="enter amount between 1-9000" >
+    <div style="font-size: 10px; margin-top: 0.5rem;"> *Paisa will be rounded to next heiger amount eg (24.56 will be 25) </div>
     <button id="playButton" onclick="playNumberAudio()">Play</button>
+    <span class="err" 
+        style="background-color: lightcoral; color: white; font-weight: 500;padding: 5px;display: block; width: 25rem; margin-left: 36%; margin-top: 5rem; text-align: center;
+        visibility: hidden;
+        ">
+    Please enter amount between 1 - 9999 only</span>
    <script>
+
+document.getElementById("numberInput").addEventListener("keydown", resetErr);
+
+function resetErr(event) {
+    console.log("Key pressed:", event.target.value);
+    // Your error-handling logic here
+    // if it is empty
+    if(!event.target.value){
+        let errElm = document.getElementsByClassName("err")[0];
+        errElm.style.visibility = 'hidden'; // to show
+    }
+}
+ 
     function breakDownNumber(num) {
         let thousands = Math.floor(num / 1000);
         let hundreds = Math.floor((num % 1000) / 100);
@@ -55,15 +74,22 @@
 
     function playNumberAudio() {
         let number = document.getElementById("numberInput").value;
+ 
         let playButton = document.getElementById("playButton");
+        let errElm = document.getElementsByClassName("err")[0];
         playButton.disabled = true; // Disable button while playing
 
         console.log(number);
-        if (number < 0 || number > 9999 || isNaN(number)) {
-            alert("Please enter a number between 0 and 9999.");
+        if (number < 0 || number > 9999 || isNaN(number) || number ==0) {
+            // alert("Please enter a number between 0 and 9999.");
+            console.log(errElm)
+            errElm.style.visibility = 'visible'; // to show
+            // errElm.style.visibility = 'visible'
             playButton.disabled = false;
             return;
-        }
+        } 
+        number = Math.ceil(number)
+         
 
         let parts = breakDownNumber(number);
         let audioQueue = [];
